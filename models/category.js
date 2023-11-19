@@ -43,6 +43,11 @@ module.exports = (sequelize, DataTypes) => {
   }, { 
     sequelize,
     modelName: 'Category',
+    hooks: {
+      beforeCreate: (category, options) => {
+        category.sold_product_amount = 0;
+      }
+    }
   });
   return Category;
 };
