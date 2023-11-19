@@ -114,6 +114,25 @@ class UserController {
             res.status(500).json(error);
         }
     }
+
+    static userTopUp (req,res){
+        try {
+            const {balance} = req.body;
+            User.increment('balance', {
+                by: balance,
+                where: { id: res.locals.user.id },
+                returning: true
+            })
+            .then(result=>{
+                const updatedbalance = result[0][0][0].balance
+                res.status(200).json({message: `Your balance has been successfully updated to Rp ${updatedbalance.toLocaleString('id-ID')}`})
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json(error);
+        }
+    }
+
 }
 
 module.exports = UserController;
