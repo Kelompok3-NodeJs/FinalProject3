@@ -65,6 +65,38 @@ class UserController {
             res.status(500).json(error);
         }
     }
+
+    static putUsers (req,res){
+        try {
+            const {full_name,email} = req.body;
+            User.update({
+                full_name,
+                email
+            },
+            {
+                where:{
+                    id: res.locals.user.id
+                },
+                returning: true
+            })
+            .then(([rowsUpdated, [updatedUser]]) => {
+                if (rowsUpdated === 0) {
+                    res.status(404).json({message: 'user not found'})
+                }
+                const response = {
+                    id: updatedUser.id,
+                    full_name:updatedUser.full_name,
+                    email:updatedUser.email,
+                    createdAt:updatedUser.createdAt,
+                    updatedAt:updatedUser.updatedAt
+                }
+                res.status(200).json(response)
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json(error);
+        }
+    }
 }
 
 module.exports = UserController;
