@@ -1,7 +1,7 @@
 const {Category,Product} = require('../models')
 
 class CategoryController {
-    static PostCategory(req, res, next) {
+    static PostCategory (req, res, next) {
         try {
             const {type} = req.body;
             Category.create({
@@ -57,6 +57,55 @@ class CategoryController {
         }
     }
 
+    static patchCategory(req,res) {
+        try {
+            const {type} = req.body;
+            const id = req.params.id;
+            Category.update({
+                 type 
+                }, 
+                { where: 
+                    { id },
+                    returning: true 
+                })
+                .then(([rowsUpdated, [updatedCategory]]) => {
+                    if (rowsUpdated === 0) {
+                        res.status(404).json({message: 'category not found'})
+                    }
+                    const response = {
+                        id: updatedCategory.id,
+                        type: updatedCategory.type,
+                        createdAt: updatedCategory.createdAt,
+                        updatedAt: updatedCategory.updatedAt,
+                        sold_product_amount: updatedCategory.sold_product_amount,
+                    }
+                    res.status(200).json(response)
+                })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json(error);
+        }
+    }
+
+    static deleteCategory(req,res) {
+        try {
+            const id = req.params.id;
+            Category.destroy({
+                where:{
+                    id
+                }
+            })
+            .then((result) => {
+                if (result === 0) {
+                    res.status(404).json({message: 'category not found'})
+                }
+                res.status(200).json({message: 'Category has been successfully deleted'})
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json(error);
+        }
+    }
 
 }
 

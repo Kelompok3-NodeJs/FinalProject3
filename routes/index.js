@@ -16,4 +16,6 @@ router.patch('/users/topup', authorization ,UserController.userTopUp);
 // category routes
 router.post('/categories', adminAuthorization ,CategoryController.PostCategory);
 router.get('/categories', adminAuthorization ,CategoryController.GetCategory);
+router.patch('/categories/:id', adminAuthorization ,CategoryController.patchCategory);
+router.delete('/categories/:id', adminAuthorization ,CategoryController.deleteCategory);
 module.exports = router;
