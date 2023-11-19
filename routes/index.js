@@ -15,4 +15,5 @@ router.patch('/users/topup', authorization ,UserController.userTopUp);
 
 // category routes
 router.post('/categories', adminAuthorization ,CategoryController.PostCategory);
+router.get('/categories', adminAuthorization ,CategoryController.GetCategory);
 module.exports = router;
