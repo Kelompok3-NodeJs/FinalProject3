@@ -2,7 +2,6 @@ const { query } = require('express')
 const {comparePassword} = require('../helpers/bcrypt')
 const {generateToken} = require('../helpers/jwt')
 const {User} = require('../models');
-const user = require('../models/user');
 
 class UserController {
     static register(req, res) {
