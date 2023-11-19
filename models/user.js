@@ -11,9 +11,15 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     // Model attributes are defined here
 
-    // full_name definition
+    // full_name definition and validation
     full_name: {
       type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Full name cannot be empty'
+        }
+      }
     },
 
     // email definition and validation
@@ -80,13 +86,34 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
 
-    // balance definition
+    // balance definition and validation
     balance: {
       type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Balance cannot be empty'
+        },
+        isNumeric: {
+          args: true,
+          msg: 'Balance must be a number'
+        },
+        min: {
+          args: [0],
+          msg: 'Balance cannot be less than 0'
+        },
+        max: {
+          args: [100000000],
+          msg: 'Balance cannot be more than 100000000'
+        }
+      }
     }
   }, {
     sequelize,
     modelName: 'User',
+    hooks: {
+  
+    }
   });
   return User;
 };

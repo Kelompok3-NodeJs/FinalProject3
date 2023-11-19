@@ -58,12 +58,8 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Stock must be a number'
         },
         min: {
-          args: [0],
-          msg: 'Stock cannot be less than 0'
-        },
-        max: {
           args: [5],
-          msg: 'Stock cannot be more than 5'
+          msg: 'Stock cannot be less than 5'
         }
       },
     }
