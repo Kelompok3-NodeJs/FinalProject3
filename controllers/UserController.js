@@ -1,4 +1,3 @@
-const { query } = require('express')
 const {comparePassword} = require('../helpers/bcrypt')
 const {generateToken} = require('../helpers/jwt')
 const {User} = require('../models');
@@ -90,6 +89,25 @@ class UserController {
                     updatedAt:updatedUser.updatedAt
                 }
                 res.status(200).json(response)
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json(error);
+        }
+    }
+
+    static deleteUsers (req,res){
+        try {
+            User.destroy({
+                where:{
+                    id: res.locals.user.id
+                }
+            })
+            .then((result) => {
+                if (result === 0) {
+                    res.status(404).json({message: 'user not found'})
+                }
+                res.status(200).json({message: 'your account has been successfully deleted'})
             })
         } catch (error) {
             console.log(error);
