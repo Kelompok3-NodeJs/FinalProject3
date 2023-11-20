@@ -1,4 +1,5 @@
-const {Category,Product} = require('../models')
+const {Category,Product} = require('../models');
+const product = require('../models/product');
 
 class CategoryController {
     static PostCategory (req, res, next) {
@@ -31,22 +32,26 @@ class CategoryController {
             .then((result) => {
                 let response = result.map((category) => {
                     return {
+                    categories: [
+                        {
                         id: category.id,
                         type: category.type,
                         sold_product_amount: category.sold_product_amount,
                         createdAt: category.createdAt,
                         updatedAt: category.updatedAt,
-                        Products: [
-                            {
-                                id: category.Products.id,
-                                title: category.Products.title,
-                                price: category.Products.price,
-                                stock: category.Products.stock,
-                                CategoryId: category.Products.CategoryId,
-                                createdAt: category.Products.createdAt,
-                                updatedAt: category.Products.updatedAt,
+                        Products: category.Products.map((product) => {
+                            return {
+                                id: product.id,
+                                title: product.title,
+                                price: product.price,
+                                stock: product.stock,
+                                CategoryId: product.CategoryId,
+                                createdAt: product.createdAt,
+                                updatedAt: product.updatedAt,
                             }
-                        ]
+                        })
+                    }
+                    ]
                     }
                 })
                 res.status(200).json(response);

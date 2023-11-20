@@ -1,3 +1,4 @@
+const { TransactionHistory } = require('../models');
 function authorization (req, res, next) {
     const authenticatedUserId = res.locals.user.id;
     if (authenticatedUserId) {
@@ -17,7 +18,24 @@ function adminAuthorization (req, res, next) {
     }
 }
 
+function getTransactionByIdAuth (req, res, next) {
+    const user = res.locals.user;
+    const hasTransaction = TransactionHistory.findOne({
+        where: {
+            id: req.params.id,
+            UserId: user.id
+        }
+    })
+    if (user.role === 'admin' || hasTransaction) {
+        next();
+    }
+    else {
+        res.status(401).json({message: 'unauthorized'})
+    }
+}
+
 module.exports = {
     authorization,
-    adminAuthorization
+    adminAuthorization,
+    getTransactionByIdAuth
 }

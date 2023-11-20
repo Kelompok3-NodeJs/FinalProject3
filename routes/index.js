@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const authentication = require('../middlewares/authentication');
-const {authorization,adminAuthorization} = require('../middlewares/authorization');
+const {authorization,adminAuthorization,getTransactionByIdAuth} = require('../middlewares/authorization');
 const CategoryController = require('../controllers/CategoryController');
 const UserController = require('../controllers/usercontroller');
 const ProductController = require('../controllers/ProductController');
+const TransactionHistoryController = require('../controllers/TransactionHistoryController');
 
 
 // user routes
@@ -26,4 +27,10 @@ router.get('/products', authorization ,ProductController.GetProducts);
 router.put('/products/:id', adminAuthorization ,ProductController.PutProductWithId);
 router.patch('/products/:id', adminAuthorization ,ProductController.PatchProductWithId);
 router.delete('/products/:id', adminAuthorization ,ProductController.DeleteProductWithId);
+
+// transcation routes
+router.post('/transactions', authorization ,TransactionHistoryController.PostTransaction);
+router.get('/transactions/user', authorization ,TransactionHistoryController.GetTransactionUser);
+router.get('/transactions/admin', adminAuthorization ,TransactionHistoryController.GetTransactionAdmin);
+router.get('/transactions/:id', authorization, getTransactionByIdAuth ,TransactionHistoryController.getTransactionById);
 module.exports = router;
