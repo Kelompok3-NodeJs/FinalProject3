@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   class TransactionHistory extends Model {
     static associate(models) {
       // define association here
+      this.belongsTo(models.User, {foreignKey: 'UserId'})
+      this.belongsTo(models.Product, {foreignKey: 'ProductId'})
     }
   }
   TransactionHistory.init({
