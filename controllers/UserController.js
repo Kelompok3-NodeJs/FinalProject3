@@ -1,4 +1,3 @@
-const { query } = require('express')
 const {comparePassword} = require('../helpers/bcrypt')
 const {generateToken} = require('../helpers/jwt')
 const {User} = require('../models');
@@ -96,6 +95,44 @@ class UserController {
             res.status(500).json(error);
         }
     }
+
+    static deleteUsers (req,res){
+        try {
+            User.destroy({
+                where:{
+                    id: res.locals.user.id
+                }
+            })
+            .then((result) => {
+                if (result === 0) {
+                    res.status(404).json({message: 'user not found'})
+                }
+                res.status(200).json({message: 'your account has been successfully deleted'})
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json(error);
+        }
+    }
+
+    static userTopUp (req,res){
+        try {
+            const {balance} = req.body;
+            User.increment('balance', {
+                by: balance,
+                where: { id: res.locals.user.id },
+                returning: true
+            })
+            .then(result=>{
+                const updatedbalance = result[0][0][0].balance
+                res.status(200).json({message: `Your balance has been successfully updated to Rp ${updatedbalance.toLocaleString('id-ID')}`})
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json(error);
+        }
+    }
+
 }
 
 module.exports = UserController;

@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Category extends Model {
     static associate(models) {
       // define association here
+      this.hasMany(models.Product, {foreignKey: 'CategoryId'})
     }
   }
   Category.init({
@@ -43,6 +44,11 @@ module.exports = (sequelize, DataTypes) => {
   }, { 
     sequelize,
     modelName: 'Category',
+    hooks: {
+      beforeCreate: (category, options) => {
+        category.sold_product_amount = 0;
+      }
+    }
   });
   return Category;
 };
