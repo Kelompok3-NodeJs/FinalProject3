@@ -2,7 +2,7 @@ const router = require('express').Router();
 const authentication = require('../middlewares/authentication');
 const {authorization,adminAuthorization,getTransactionByIdAuth} = require('../middlewares/authorization');
 const CategoryController = require('../controllers/CategoryController');
-const UserController = require('../controllers/usercontroller');
+const UserController = require('../controllers/UserController');
 const ProductController = require('../controllers/ProductController');
 const TransactionHistoryController = require('../controllers/TransactionHistoryController');
 
