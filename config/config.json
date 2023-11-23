@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "postgres",
-    "password": "admin",
-    "database": "Toko_Belanja",
-    "host": "127.0.0.1",
+    "password": "aAcgG43*eDdce6g3E*d6ddFe4d2c4C144in",
+    "database": "railway",
+    "host": "monorail.proxy.rlwy.net",
     "dialect": "postgres"
   },
   "test": {
