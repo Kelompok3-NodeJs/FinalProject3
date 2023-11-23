@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "aAcgG43*eDdce6g3E*d6ddFe4d2c4C144in",
+    "password": "AcgG43*eDdce6g3E*d6ddFe4d2c4C144",
     "database": "railway",
     "host": "monorail.proxy.rlwy.net",
     "dialect": "postgres",
