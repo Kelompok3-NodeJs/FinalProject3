@@ -1,15 +1,34 @@
 require("dotenv").config()
-process.env.NODE_ENV = 'development';
-process.env.DATABASE_URL = 'postgresql://postgres:AcgG43*eDdce6g3E*d6ddFe4d2c4C144@monorail.proxy.rlwy.net:11456/railway';
+const Environtment = process.env.NODE_ENV;
+const Database_URL = process.env.DATABASE_URL;
+
+const { Pool } = require('pg');
+
+const pool = new Pool({
+    connectionString: Database_URL,
+});
+
+pool.connect()
+    .then(() => console.log('Connected to the database'))
+    .catch(err => console.error('Error connecting to the database', err));
 
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PGPORT;
 const router = require('./routes');
 
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Using the environment variable for specific configurations
+if (Environtment === 'development') {
+    // Perform specific actions or configurations for the development environment
+    console.log('Running in development mode');
+} else {
+    // Handle other environments if needed
+    console.log('Running in some other environment');
+}
 
 app.use(router);
 

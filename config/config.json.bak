@@ -5,7 +5,8 @@
     "database": "railway",
     "host": "monorail.proxy.rlwy.net",
     "dialect": "postgres",
-    "port": "11456"
+    "port": "11456",
+    "database_url": "postgresql://postgres:AcgG43*eDdce6g3E*d6ddFe4d2c4C144@monorail.proxy.rlwy.net:11456/railway"
   },
   "test": {
     "username": "root",
