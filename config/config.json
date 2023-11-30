@@ -4,7 +4,7 @@
     "password": "${PGPASSWORD}",
     "database": "${PGDATABASE}",
     "host": "${PGHOST}",
-    "dialect": "${PGDIALECT}",
+    "dialect": "postgres",
     "port": "${PGPORT}"
   },
   "test": {

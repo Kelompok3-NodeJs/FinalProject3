@@ -1,8 +1,6 @@
 require("dotenv").config()
 const Environtment = process.env.NODE_ENV;
 const Database_URL = process.env.DATABASE_URL;
-
-
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -15,7 +13,7 @@ pool.connect()
 
 const express = require('express');
 const app = express();
-const port = process.env.PGPORT;
+const port = process.env.PORT;
 const router = require('./routes');
 
 
