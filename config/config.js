@@ -5,7 +5,8 @@ module.exports = {
       database: process.env.PGDATABASE,
       host: process.env.PGHOST,
       dialect: process.env.PGDIALECT,
-      port: process.env.PGPORT
+      pgport: process.env.PGPORT,
+      port: process.env.PORT
     
     },
     test: {
@@ -22,5 +23,5 @@ module.exports = {
       host: null,
       dialect: null
     }
-  };
+};
   
