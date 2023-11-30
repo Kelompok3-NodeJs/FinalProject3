@@ -3,7 +3,7 @@ const Environtment = process.env.NODE_ENV;
 
 const express = require('express');
 const app = express();
-const port = parseInt(process.env.PGPORT, 10); // Convert PGPORT to an integer base 10
+const port = process.env.PORT;
 const router = require('./routes');
 
 

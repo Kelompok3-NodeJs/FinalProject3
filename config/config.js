@@ -5,8 +5,7 @@ module.exports = {
       database: process.env.PGDATABASE,
       host: process.env.PGHOST,
       dialect: process.env.PGDIALECT,
-      pgport: process.env.PGPORT,
-      port: process.env.PORT
+      pgport: process.env.PGPORT
     
     },
     test: {
