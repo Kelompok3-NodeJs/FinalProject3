@@ -1,19 +1,9 @@
 require("dotenv").config()
 const Environtment = process.env.NODE_ENV;
-const Database_URL = process.env.DATABASE_URL;
-const { Pool } = require('pg');
-
-const pool = new Pool({
-    connectionString: Database_URL,
-});
-//
-pool.connect()
-    .then(() => console.log('Connected to the database'))
-    .catch(err => console.error('Error connecting to the database', err));
 
 const express = require('express');
 const app = express();
-const port = process.env.PORT;
+const port = parseInt(process.env.PGPORT, 10); // Convert PGPORT to an integer base 10
 const router = require('./routes');
 
 
